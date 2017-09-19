@@ -31,4 +31,14 @@ public class ReserveAuction extends Auction {
 		}
 		return isCurrentWinningBid;
 	}
+
+	@Override //R click- source- override 
+	public String toString() {
+		
+//		return super.toString(); //start with then modify to below
+		return "Reserve $" + reservePrice + " | " + super.toString();
+	}
+	
+	//override 2 string to add more to string when it's reserved
+	
 }

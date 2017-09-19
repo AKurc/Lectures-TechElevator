@@ -1,6 +1,8 @@
 package com.techelevator;
 
-public class Bid {
+public class Bid { //a Bid is a Java Bean = a class that holds data and has getters/setters
+	//class is a complex object => holds multiple other data types
+	//has a bidder and a bidAmount
 
 	private String bidder;
 	private int bidAmount;

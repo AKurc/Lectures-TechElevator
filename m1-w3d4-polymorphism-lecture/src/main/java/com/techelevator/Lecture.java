@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.techelevator.farm.Animal;
 import com.techelevator.farm.Chicken;
 import com.techelevator.farm.Cow;
@@ -7,6 +10,9 @@ import com.techelevator.farm.Cow;
 public class Lecture {
 
 	public static void main(String[] args) {
+		
+		List<Animal> animals = new ArrayList<>(); //collection is another interface//interfaces can only inherit from another interface
+		//every list will have an isEmpty method && contains object
 		
 		Animal anAnimal = new Cow();
 		

@@ -1,12 +1,15 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class PaintCalc {
+public class PaintCalc { //command line application that lets you calculate paint
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		
+		List<Rectangle> allWalls = new ArrayList<>();//need so you can just add to rectangle created below
 		while(true) {
 			
 			System.out.println();
@@ -24,19 +27,28 @@ public class PaintCalc {
 				System.out.print("Enter wall width >>> ");
 				int width = Integer.parseInt(scan.nextLine());
 				int area = height * width;
-				System.out.println("Added "+height+"x"+width+" wall - "+area+" square feet");
+				
+				//w/height and width, create a new rectangle
+				Rectangle wall = new Rectangle(height, width); //height and width given by user
+				allWalls.add(wall);
+				
+				System.out.println("Added "+wall.getHeight() + "x" + wall.getLength() + " wall - " + wall.getArea() + " square feet");
+				//object gone after ran because it's out of scope => use a list, of rectangle objects, outside of while statement
+				
 				
 			} else if(userChoice.equals("2")) {
 				
-				// Here we need to sum up the areas of all walls that have been entered
-				System.out.println("Wall 1: 10x15 - 150 square feet"); // PROTOTYPE ONLY!!!
-				System.out.println("Wall 2: 10x15 - 150 square feet"); // PROTOTYPE ONLY!!!
-				System.out.println("Wall 3: 10x15 - 150 square feet"); // PROTOTYPE ONLY!!!
-				System.out.println("Wall 4: 10x15 - 150 square feet"); // PROTOTYPE ONLY!!!
-				
-				int totalArea = 600; // PROTOTYPE ONLY!!!
-				System.out.println("===============================");
+				int totalArea = 0; // needs to be above for loop
+				for(Rectangle currentWall : allWalls)
+				System.out.println("Wall: "+currentWall.getHeight() + "x" + currentWall.getLength() + " wall - " + currentWall.getArea() + " square feet");
 				System.out.println("Total Area: "+totalArea+" square feet");
+				
+				// Here we need to sum up the areas of all walls that have been entered
+				for(Rectangle currentWall : allWalls) {
+				System.out.println("Wall: "+currentWall.getHeight() + "x" + currentWall.getLength() + " wall - " + currentWall.getArea() + " square feet"); // PROTOTYPE ONLY!!!
+				}
+				
+				
 				
 				// 1 gallon of paint covers 400 square feet
 				float gallonsRequired = (float)totalArea / 400;
