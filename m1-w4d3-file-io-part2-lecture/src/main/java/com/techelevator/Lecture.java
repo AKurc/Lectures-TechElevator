@@ -9,8 +9,9 @@ import java.io.PrintWriter;
 public class Lecture {
 
 	public static void main(String[] args) throws IOException {
-		
+		//System.in. --methods of sys.in-- barbaric-- DON'T USE THIS METHOD- use a stream reader, UNLESS working with binary data
 		BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+		//Scanner is specifically used for text (user input) -- manipulate jpeg or gif- use binary input streams
 		
 		/* 
 		 * The java.io.File class is a representation of file and directory path names.  It provides methods to inspect and 
@@ -27,6 +28,7 @@ public class Lecture {
 
 		/* 
 		 * The File class allows us to inspect various attributes of a file system object 
+		 // is an object represented on the hard drive
 		 */
 		 
 		/* ***************************
@@ -36,13 +38,13 @@ public class Lecture {
 		System.out.println();
 		if(f.exists()) { // returns true if a file or directory exists at the file system location, otherwise returns false
 			System.out.println("name: "+f.getName());
-			System.out.println("absolutePath: "+f.getAbsolutePath());
+			System.out.println("absolutePath: "+f.getAbsolutePath()); //getAbsPath starts at root of HD and looks through to where you're working to find file
 			if(f.isDirectory()) {
-				System.out.println("type: directory");
+				System.out.println("type: directory");// directory is sort of a file- has a description on HD
 			} else if(f.isFile()) {
 				System.out.println("type: file");
 			}
-			System.out.println("size : "+f.length());
+			System.out.println("size : "+f.length()); //length should have been called size (returns in bytes)
 		} else {
 			System.out.println(f.getAbsolutePath()+" does not exist.");
 		}
@@ -64,10 +66,10 @@ public class Lecture {
 		if(newDirectory.exists()) {
 			System.out.println("Sorry, "+newDirectory.getAbsolutePath()+" already exists.");
 			System.exit(1);
-		} else {
+		} else { //if pathways doesn't exist, it goes to else
 			if(newDirectory.mkdir()) {
 				System.out.println("New directory created at "+newDirectory.getAbsolutePath());
-			} else {
+			} else { //can't create directory- tells you that
 				System.out.println("Could not create directory.");
 				System.exit(1);
 			}
@@ -81,9 +83,9 @@ public class Lecture {
 		System.out.println("Now let's put a file in the directory.");
 		System.out.print("Enter a name for the new file >>> ");
 		String fileName = userInput.readLine();
-		File newFile = new File(newDirectory, fileName);
+		File newFile = new File(newDirectory, fileName); //new file is a new object
 		
-		newFile.createNewFile();
+		newFile.createNewFile(); //empty new file with that name in that directory
 		System.out.println();
 		System.out.println("name: "+newFile.getName());
 		System.out.println("absolutePath: "+newFile.getAbsolutePath());
@@ -99,8 +101,8 @@ public class Lecture {
 		System.out.print("Enter a message to be stored in the new file >>> ");
 		String message = userInput.readLine();
 		
-		try(PrintWriter writer = new PrintWriter(newFile)) {
-			writer.println(message);
+		try(PrintWriter writer = new PrintWriter(newFile)) { //PrintWriter is way we will open files for writing-- pass in a file object
+			writer.println(message); //auto flush built in to object
 		} // When we exit the try block, this cause the file to be closed and an automatic flush of the buffer to trigger
 		
 		System.out.println();

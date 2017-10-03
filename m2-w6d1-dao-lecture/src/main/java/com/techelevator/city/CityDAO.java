@@ -3,11 +3,11 @@ package com.techelevator.city;
 import java.util.List;
 
 public interface CityDAO {
-
-	public void save(City newCity);
-	public City findCityById(long id);
-	public List<City> findCityByCountryCode(String countryCode);
-	public List<City> findCityByDistrict(String district);
-	public void update(City city);
-	public void delete(long id);
+									//Uses CRUD acronym
+	public void save(City newCity); //Create
+	public City findCityById(long id); //Retrieve
+	public List<City> findCityByCountryCode(String countryCode); //Retrieve
+	public List<City> findCityByDistrict(String district); //Retrieve
+	public void update(City city); //Update
+	public void delete(long id); //Delete
 }

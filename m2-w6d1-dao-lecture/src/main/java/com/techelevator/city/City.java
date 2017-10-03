@@ -1,6 +1,6 @@
 package com.techelevator.city;
 
-public class City {
+public class City { //instance variables are column names in table and all have getters and setters
 	private Long id;
 	private String name;
 	private String countryCode;

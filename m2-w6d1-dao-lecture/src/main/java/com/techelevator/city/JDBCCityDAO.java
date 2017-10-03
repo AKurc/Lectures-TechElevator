@@ -13,14 +13,14 @@ public class JDBCCityDAO implements CityDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 	public JDBCCityDAO(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcTemplate = new JdbcTemplate(dataSource); //passing in db
 	}
 
 	@Override
 	public void save(City newCity) {
 		String sqlInsertCity = "INSERT INTO city(id, name, countrycode, district, population) " +
 							   "VALUES(?, ?, ?, ?, ?)";
-		newCity.setId(getNextCityId());
+		//newCity.setId(getNextCityId());
 		jdbcTemplate.update(sqlInsertCity, newCity.getId(),
 										  newCity.getName(),
 										  newCity.getCountryCode(),
@@ -35,7 +35,7 @@ public class JDBCCityDAO implements CityDAO {
 							   "FROM city "+
 							   "WHERE id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFindCityById, id);
-		if(results.next()) {
+		if(results.next()) { //if row here, turn row into a java, city, object
 			theCity = mapRowToCity(results);
 		}
 		return theCity;
@@ -48,13 +48,14 @@ public class JDBCCityDAO implements CityDAO {
 										   "FROM city "+
 										   "WHERE countrycode = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFindCityByCountryCode, countryCode);
-		while(results.next()) {
+		while(results.next()) { //while = expecting more than one result
 			City theCity = mapRowToCity(results);
-			cities.add(theCity);
+			cities.add(theCity); //put city result in list
 		}
-		return cities;
+		return cities; //return list of city
+	
 	}
-
+	
 	@Override
 	public List<City> findCityByDistrict(String district) {
 		// TODO Auto-generated method stub
@@ -63,13 +64,19 @@ public class JDBCCityDAO implements CityDAO {
 
 	@Override
 	public void update(City city) {
-		// TODO Auto-generated method stub
+		// have city object, save to database
+		String sqlUpdateCity = "UPDATE city SET name=?, countrycode=?, district=?, population=? WHERE id =?";
+		
+		jdbcTemplate.update(sqlUpdateCity, city.getName(), city.getCountryCode(), 
+										   city.getDistrict(), city.getPopulation(), city.getId());
+		
+		
 		
 	}
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
+		jdbcTemplate.update("DELETE FROM city WHERE id=?", id); //gets rid of whole row from database
 		
 	}
 
